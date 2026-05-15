@@ -72,14 +72,16 @@ export function deleteTodo(id: number): void {
 export function listTodos(): void {
   const todos = readTodos();
   if (todos.length === 0) {
-    console.log('\n📝 To-Do List masih kosong.\n');
+    console.log(
+      '\n[!] To-Do List masih kosong. Belum ada ID yang tterdaftar \n'
+    );
     return;
   }
 
-  console.log('\n--- Daftar To-Do ---');
+  console.log('\n--- Daftar To-Do (Gunakan ID untuk memilih) ---');
   todos.forEach((todo) => {
     const statusTag = todo.status === 'active' ? '[ACTIVE]' : '[DONE]  ';
-    console.log(`${statusTag} ${todo.id}. ${todo.text}`);
+    console.log(`ID: [${statusTag}] [${todo.id}] [${todo.text}]`);
   });
   console.log('--------------------\n');
 }
