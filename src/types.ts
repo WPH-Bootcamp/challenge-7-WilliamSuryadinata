@@ -15,3 +15,11 @@ export interface Todo {
   status: TodoStatus;
   createdAt: string;
 }
+
+export interface TodoService {
+  addTodo: (text: string) => void;
+  completeTodo: (id: number) => void;
+  deleteTodo: (id: number) => void;
+  listTodos: () => void;
+  searchTodos: (keyword: string) => void;
+}

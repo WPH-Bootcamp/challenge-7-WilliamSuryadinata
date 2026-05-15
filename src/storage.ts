@@ -13,15 +13,15 @@ import { isValidTodoArray } from './utils';
 
 // TODO: Buat fungsi untuk inisialisasi storage (buat file kosong jika belum ada)
 
-const Data_Dir = path.join(__dirname, '..', 'data');
-const File_Path = path.join(Data_Dir, 'todos.json');
+const DATA_DIR = path.join(__dirname, '..', 'data');
+const FILE_PATH = path.join(DATA_DIR, 'todos.json');
 
 export function initStorage(): void {
   try {
-    if (!fs.existsSync(Data_Dir)) {
-      fs.mkdirSync(Data_Dir, { recursive: true });
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
     }
-    if (!fs.existsSync(File_Path)) {
+    if (!fs.existsSync(FILE_PATH)) {
       saveTodos([]);
     }
   } catch (error) {
@@ -31,11 +31,11 @@ export function initStorage(): void {
 
 export function readTodos(): Todo[] {
   try {
-    if (!fs.existsSync(File_Path)) {
+    if (!fs.existsSync(FILE_PATH)) {
       initStorage();
       return [];
     }
-    const data = fs.readFileSync(File_Path, 'utf-8');
+    const data = fs.readFileSync(FILE_PATH, 'utf-8');
     const parsed = JSON.parse(data);
 
     if (isValidTodoArray(parsed)) {
@@ -55,7 +55,7 @@ export function readTodos(): Todo[] {
 export function saveTodos(todos: Todo[]): void {
   try {
     const jsonString = JSON.stringify(todos, null, 2);
-    fs.writeFileSync(File_Path, jsonString, 'utf-8');
+    fs.writeFileSync(FILE_PATH, jsonString, 'utf-8');
   } catch (error) {
     console.error('Error saat menyimpan ke todos.json:', error);
   }
